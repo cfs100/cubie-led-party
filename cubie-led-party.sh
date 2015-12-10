@@ -22,7 +22,22 @@ for arg in $@; do
 			;;
 		*)
 			echo "Usage: $0 [OPTIONS]"
-			echo "[-random] [-nuts] [-on] [-off] [-slow] [-fast] [-fastest]"
+			echo "Small handler for Cubieboard's built-in LEDs"
+			echo
+			echo "All available arguments are optional and can be combined"
+			echo "  -random	use available leds randomly"
+			echo "  -nuts		make led status (on/off) random"
+			echo "  -on		turn on available leds and quit"
+			echo "  -off		turn off available leds and quit"
+			echo "  -slow		use a slow speed between actions"
+			echo "  -fast		use a fast speed between actions"
+			echo "  -fastest	use the fastest speed between actions"
+			echo "  -led=VALUE	add this led to the available leds list"
+			echo
+			echo "Available leds are:"
+			for color in $(ls /sys/class/leds/ | sed 's/:.*//'); do
+				echo "  - $color"
+			done
 			exit 1
 			;;
 	esac
